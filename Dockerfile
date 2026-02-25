@@ -16,7 +16,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     ca-certificates \
     gnupg \
-    $(grep -v '^python' /tmp/packages_base.txt | grep -v '^#' | grep -v '^$' | tr '\n' ' ') \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    libmemcached-dev \
+    libevent-dev \
+    zlib1g-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    $(grep -v '^python' /tmp/packages_base.txt | grep -v '^#' | grep -v '^$' | grep -v 'build-essential' | grep -v 'libpq-dev' | grep -v 'libcurl' | grep -v 'libssl' | grep -v 'libmemcached' | grep -v 'libevent' | grep -v 'zlib' | grep -v 'libjpeg' | grep -v 'libfreetype' | tr '\n' ' ') \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Node.js for LESS (secure method with GPG verification)
