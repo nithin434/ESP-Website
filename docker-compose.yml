@@ -3,7 +3,6 @@ version: '3.8'
 services:
   db:
     image: postgres:14-alpine
-    container_name: esp_db
     environment:
       POSTGRES_DB: devsite_django
       POSTGRES_USER: esp
@@ -24,7 +23,6 @@ services:
 
   memcached:
     image: memcached:alpine
-    container_name: esp_memcached
     ports:
       - "11211:11211"
     restart: unless-stopped
@@ -36,13 +34,9 @@ services:
       context: .
       dockerfile: Dockerfile
       target: runtime
-    container_name: esp_web
     volumes:
       # Mount source code for live reloading (dev only)
       - ./esp:/app/esp:cached
-      # Exclude Python cache
-      - /app/esp/__pycache__
-      - /app/esp/**/__pycache__
     ports:
       - "8000:8000"
     depends_on:
@@ -52,14 +46,6 @@ services:
         condition: service_started
     environment:
       VIRTUAL_ENV: /usr
-      DATABASE_HOST: db
-      DATABASE_PORT: 5432
-      DATABASE_NAME: devsite_django
-      DATABASE_USER: esp
-      DATABASE_PASSWORD: password
-      MEMCACHED_HOST: memcached
-      MEMCACHED_PORT: 11211
-      DJANGO_SETTINGS_MODULE: esp.settings
     restart: unless-stopped
     stdin_open: true
     tty: true
