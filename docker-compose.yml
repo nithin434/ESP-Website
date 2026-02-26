@@ -36,7 +36,7 @@ services:
       target: runtime
     volumes:
       # Mount source code for live reloading (dev only)
-      - ./esp:/app/esp:cached
+      - .:/app:cached
     ports:
       - "8000:8000"
     depends_on:
