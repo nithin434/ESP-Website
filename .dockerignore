@@ -72,7 +72,6 @@ logs
 
 # Docker files
 docker-compose.override.yml
-.dockerignore
 
 # Static/media (generated)
 public/media/uploaded
