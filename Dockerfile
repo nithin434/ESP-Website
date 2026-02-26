@@ -34,7 +34,7 @@ RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg -
     && rm -rf /var/lib/apt/lists/*
 
 # Install LESS globally
-RUN npm install -g less@1.7.5 && npm cache clean --force
+RUN npm install -g less@1.7.5
 
 # Install Python dependencies (Docker layer caching speeds up rebuilds)
 COPY esp/requirements.txt /tmp/requirements.txt
